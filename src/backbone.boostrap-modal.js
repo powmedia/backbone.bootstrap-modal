@@ -183,8 +183,7 @@
 
   //Regular; add to Backbone.Bootstrap.Modal
   else {
-    Backbone.Bootstrap = Backbone.Bootstrap || {};
-    Backbone.Bootstrap.Modal = Modal;
+    Backbone.BootstrapModal = Modal;
   }
 
 })(jQuery, _, Backbone);
