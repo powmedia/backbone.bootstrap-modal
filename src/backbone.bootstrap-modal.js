@@ -60,6 +60,7 @@
      */
     initialize: function(options) {
       this.options = _.extend({
+        title: null,
         okText: 'OK',
         cancelText: 'Cancel',
         closeable: true,
