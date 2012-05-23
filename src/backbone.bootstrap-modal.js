@@ -7,8 +7,8 @@
  * @author Charles Davison <charlie@powmedia.co.uk>
  *
  * Events:
- * closed: The user dismissed the modal
- * done: The user clicked OK
+ * cancel: The user dismissed the modal
+ * ok: The user clicked OK
  */
 (function($, _, Backbone) {
 
@@ -22,7 +22,7 @@
   var template = _.template('\
     <% if (title) { %>\
       <div class="modal-header">\
-        <% if (closeable) { %>\
+        <% if (allowCancel) { %>\
           <a class="close">×</a>\
         <% } %>\
         <h3>{{title}}</h3>\
@@ -30,7 +30,7 @@
     <% } %>\
     <div class="modal-body"><p>{{content}}</p></div>\
     <div class="modal-footer">\
-      <% if (closeable) { %>\
+      <% if (allowCancel) { %>\
         <a href="#" class="btn cancel">{{cancelText}}</a>\
       <% } %>\
       <a href="#" class="btn ok btn-primary">{{okText}}</a>\
@@ -53,8 +53,8 @@
      * @param {String} [options.title]        Title. Default: none
      * @param {String} [options.okText]       Text for the OK button. Default: 'OK'
      * @param {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'
-     * @param {Boolean} [options.closeable]   Whether the modal can be closed, other than by pressing OK. Default: true
-     * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if closeable is true
+     * @param {Boolean} [options.allowCancel  Whether the modal can be closed, other than by pressing OK. Default: true
+     * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
      * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
      * @param {Function} [options.template]   Compiled underscore template to override the default one
      */
@@ -63,7 +63,7 @@
         title: null,
         okText: 'OK',
         cancelText: 'Cancel',
-        closeable: true,
+        allowCancel: true,
         escape: true,
         animate: false,
         template: template
@@ -76,19 +76,19 @@
       'click .close': function(event) {
         event.preventDefault();
 
-        this.trigger('closed');
+        this.trigger('cancel');
         this.close();
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
-        this.trigger('closed');
+        this.trigger('cancel');
         this.close();
       },
       'click .ok': function(event) {
         event.preventDefault();
 
-        this.trigger('done');
+        this.trigger('ok');
         this.close();
       }
     },
@@ -128,8 +128,8 @@
 
       //Create it
       $el.modal({
-        keyboard: this.options.closeable,
-        backdrop: this.options.closeable ? true : 'static'
+        keyboard: this.options.allowCancel,
+        backdrop: this.options.allowCancel ? true : 'static'
       });
 
       //Focus OK button
@@ -161,7 +161,7 @@
 
     /**
      * Stop the modal from closing.
-     * Can be called from within a 'close' or 'done' event listener.
+     * Can be called from within a 'close' or 'ok' event listener.
      */
     preventClose: function() {
       this._preventClose = true;
