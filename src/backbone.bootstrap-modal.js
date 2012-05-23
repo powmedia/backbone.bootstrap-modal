@@ -115,6 +115,8 @@
 
       if (options.animate) $el.addClass('fade');
 
+      this.isRendered = true;
+
       return this;
     },
 
@@ -122,7 +124,7 @@
      * Renders and shows the modal
      */
     open: function() {
-      this.render();
+      if (!this.isRendered) this.render();
 
       var $el = this.$el;
 
