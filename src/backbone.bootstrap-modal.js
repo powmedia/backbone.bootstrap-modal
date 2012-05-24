@@ -1,8 +1,8 @@
 /**
  * Bootstrap Modal wrapper for use with Backbone.
  * 
- * Takes care of instantiation, adds several options and 
- * removes the element from the DOM when closed
+ * Takes care of instantiation, manages multiple modals,
+ * adds several options and removes the element from the DOM when closed
  *
  * @author Charles Davison <charlie@powmedia.co.uk>
  *
@@ -43,6 +43,29 @@
 
   var Modal = Backbone.View.extend({
 
+    className: 'modal',
+
+    events: {
+      'click .close': function(event) {
+        event.preventDefault();
+
+        this.trigger('cancel');
+        this.close();
+      },
+      'click .cancel': function(event) {
+        event.preventDefault();
+
+        this.trigger('cancel');
+        this.close();
+      },
+      'click .ok': function(event) {
+        event.preventDefault();
+
+        this.trigger('ok');
+        this.close();
+      }
+    },
+
     /**
      * Creates an instance of a Bootstrap Modal
      *
@@ -68,29 +91,6 @@
         animate: false,
         template: template
       }, options);
-    },
-
-    className: 'modal',
-
-    events: {
-      'click .close': function(event) {
-        event.preventDefault();
-
-        this.trigger('cancel');
-        this.close();
-      },
-      'click .cancel': function(event) {
-        event.preventDefault();
-
-        this.trigger('cancel');
-        this.close();
-      },
-      'click .ok': function(event) {
-        event.preventDefault();
-
-        this.trigger('ok');
-        this.close();
-      }
     },
 
     /**
@@ -140,6 +140,16 @@
         $el.off('shown', this);
       });
 
+      //Adjust the modal and backdrop z-index; for dealing with multiple modals
+      var $backdrop = $('.modal-backdrop:eq('+Modal.count+')'),
+          backdropIndex = $backdrop.css('z-index'),
+          elIndex = $backdrop.css('z-index');
+
+      $backdrop.css('z-index', backdropIndex + Modal.count);
+      this.$el.css('z-index', elIndex + Modal.count);
+
+      Modal.count++;
+      
       return this;
     },
 
@@ -159,6 +169,8 @@
       $el.modal('hide');
 
       $el.one('hidden', _.bind(this.remove, this));
+
+      Modal.count--;
     },
 
     /**
@@ -168,6 +180,11 @@
     preventClose: function() {
       this._preventClose = true;
     }
+  }, {
+    //STATICS
+
+    //The number of modals on display
+    count: 0
   });
 
 
