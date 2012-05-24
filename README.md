@@ -12,7 +12,8 @@ Backbone.BootstrapModal
 ###cancel
 The user dismissed the modal (e.g. pressed cancel or Esc etc.)
 
-###ok: The user clicked OK
+###ok
+The user clicked OK
 
 
 ##Methods
@@ -29,6 +30,7 @@ Set up the modal with the following options:
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
 
+Usage:
 
     var view = new Backbone.View({...});
   
