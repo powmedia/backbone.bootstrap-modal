@@ -141,12 +141,13 @@
       });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
-      var $backdrop = $('.modal-backdrop:eq('+Modal.count+')'),
+      var numModals = Modal.count,
+          $backdrop = $('.modal-backdrop:eq('+numModals+')'),
           backdropIndex = $backdrop.css('z-index'),
           elIndex = $backdrop.css('z-index');
 
-      $backdrop.css('z-index', backdropIndex + Modal.count);
-      this.$el.css('z-index', elIndex + Modal.count);
+      $backdrop.css('z-index', backdropIndex + numModals);
+      this.$el.css('z-index', elIndex + numModals);
 
       Modal.count++;
       
