@@ -6,19 +6,18 @@ Backbone.BootstrapModal
 - Adds several options
 - Removes the element from the DOM when closed
 
-##API
 
-###Events
+##Events
 
-####cancel
+###cancel
 The user dismissed the modal (e.g. pressed cancel or Esc etc.)
 
-####ok: The user clicked OK
+###ok: The user clicked OK
 
 
-###Methods
+##Methods
 
-####new Backbone.BootstrapModal(options)
+###new Backbone.BootstrapModal(options)
 Set up the modal with the following options:
 
 - {String|View} [options.content] Modal content. Default: none
@@ -30,27 +29,25 @@ Set up the modal with the following options:
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
 
-Usage:
-
-  var view = new Backbone.View({...});
-
-  var modal = new Backbone.BootstrapModal({ content: view }).open();
+    var view = new Backbone.View({...});
+  
+    var modal = new Backbone.BootstrapModal({ content: view }).open();
 
 
-####modal.open()
+###modal.open()
 Renders and opens the modal
 
 
-####modal.close()
+###modal.close()
 Close the modal and remove it from the DOM
 
 
-####modal.preventClose()
+###modal.preventClose()
 Prevents the modal from closing. Can be called from within a 'ok' or 'cancel' event listener:
 
-  var modal = new Backbone.BootstrapModal().open();
-
-  modal.on('ok', function() {
-    //Do some validation etc.
-    if (!isValid) modal.preventClose();
-  });
+    var modal = new Backbone.BootstrapModal().open();
+  
+    modal.on('ok', function() {
+      //Do some validation etc.
+      if (!isValid) modal.preventClose();
+    });
