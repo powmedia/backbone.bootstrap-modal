@@ -29,9 +29,11 @@ Set up the modal with the following options:
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
 
+
     var view = new Backbone.View({...});
   
     var modal = new Backbone.BootstrapModal({ content: view }).open();
+
 
 
 ###modal.open()
