@@ -7,6 +7,14 @@ Backbone.BootstrapModal
 - Removes the element from the DOM when closed
 
 
+
+##Usage
+
+    var view = new Backbone.View({...});
+  
+    var modal = new Backbone.BootstrapModal({ content: view }).open();
+
+
 ##Events
 
 ###cancel
@@ -29,13 +37,6 @@ Set up the modal with the following options:
 - {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal- true, but false if options.cancellable is true
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
-
-Usage:
-
-    var view = new Backbone.View({...});
-  
-    var modal = new Backbone.BootstrapModal({ content: view }).open();
-
 
 
 ###modal.open()
