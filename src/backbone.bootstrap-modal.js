@@ -145,6 +145,10 @@
 
         self.trigger('shown');
       });
+      
+      $el.one('hidden', function () {
+          self.trigger('cancel');
+      });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
       var numModals = Modal.count,
