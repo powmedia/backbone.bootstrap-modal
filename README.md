@@ -45,8 +45,8 @@ Set up the modal with the following options:
 - {Function} [options.template]   Compiled underscore template to override the default one
 
 
-###modal.open()
-Renders and opens the modal
+###modal.open([cb])
+Renders and opens the modal, running the optional callback if the 'OK' button is pressed
 
 
 ###modal.close()
