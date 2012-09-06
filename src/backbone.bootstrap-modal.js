@@ -222,7 +222,7 @@
 
   //EXPORTS
   //CommonJS
-  if (typeof require == 'function' && module && exports) {
+  if (typeof require == 'function' && typeof module !== 'undefined' && exports) {
     module.exports = Modal;
   }
 
