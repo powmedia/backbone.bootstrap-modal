@@ -30,7 +30,7 @@
         <h3>{{title}}</h3>\
       </div>\
     <% } %>\
-    <div class="modal-body"><p>{{content}}</p></div>\
+    <div class="modal-body">{{content}}</div>\
     <div class="modal-footer">\
       <% if (allowCancel) { %>\
         <% if (cancelText) { %>\
@@ -110,11 +110,11 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body p')
+      var $content = this.$content = $el.find('.modal-body')
 
       //Insert the main content if it's a view
       if (content.$el) {
-        $el.find('.modal-body p').html(content.render().$el);
+        $el.find('.modal-body').html(content.render().$el);
       }
 
       if (options.animate) $el.addClass('fade');
