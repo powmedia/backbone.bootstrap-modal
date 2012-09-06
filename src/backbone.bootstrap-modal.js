@@ -229,7 +229,7 @@
   //AMD / RequireJS
   if (typeof define === 'function' && define.amd) {
     return define(function() {
-      return Modal;
+      Backbone.BootstrapModal = Modal;
     })
   }
 
