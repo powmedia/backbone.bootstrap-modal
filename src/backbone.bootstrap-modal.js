@@ -133,18 +133,24 @@
       var self = this,
           $el = this.$el;
 
+      //Focus OK button - called when modal shown
+      $el.one('shown', function() {
+        $el.find('.btn.ok').focus();
+        self.trigger('shown');
+      });
+
+      // listener for hidden
+      $el.one('hidden', function() {
+        self.remove();
+        self.trigger('hidden');
+      });
+
       //Create it
       $el.modal({
         keyboard: this.options.allowCancel,
         backdrop: this.options.allowCancel ? true : 'static'
       });
 
-      //Focus OK button
-      $el.one('shown', function() {
-        $el.find('.btn.ok').focus();
-
-        self.trigger('shown');
-      });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
       var numModals = Modal.count,
@@ -193,12 +199,6 @@
       }
 
       $el.modal('hide');
-
-      $el.one('hidden', function() {
-        self.remove();
-
-        self.trigger('hidden');
-      });
 
       Modal.count--;
     },
