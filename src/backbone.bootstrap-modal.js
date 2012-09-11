@@ -54,13 +54,11 @@
         event.preventDefault();
 
         this.trigger('cancel');
-        this.close();
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
         this.trigger('cancel');
-        this.close();
       },
       'click .ok': function(event) {
         event.preventDefault();
@@ -126,8 +124,10 @@
 
     /**
      * Renders and shows the modal
+     *
+     * @param {Function} [cb]     Optional callback that runs only when OK is pressed.
      */
-    open: function() {
+    open: function(cb) {
       if (!this.isRendered) this.render();
 
       var self = this,
@@ -154,29 +154,27 @@
 
       $backdrop.css('z-index', backdropIndex + numModals);
       this.$el.css('z-index', elIndex + numModals);
-      
-      var that = this;
 
       if (this.options.allowCancel) {
-
-          $backdrop.click(function() {
-              that.trigger('cancel');
-          });
+        $backdrop.one('click', function() {
+          self.trigger('cancel');
+        });
+        
+        $(document).one('keyup.dismiss.modal', function (e) {
+          e.which == 27 && self.trigger('cancel');
+        });
       }
 
-      $(document).on('keyup.dismiss.modal', function ( e ) {
-          e.which == 27 && that.trigger('cancel');
-      });
-
-      $el.one('hide', function() {
-          $(document).off('keyup.dismiss.modal');
-      });
-
       this.on('cancel', function() {
-          that.close();
+        self.close();
       });
 
       Modal.count++;
+
+      //Run callback on OK if provided
+      if (cb) {
+        self.on('ok', cb);
+      }
       
       return this;
     },
