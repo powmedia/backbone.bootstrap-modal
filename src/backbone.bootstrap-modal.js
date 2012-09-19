@@ -114,6 +114,11 @@
       return this;
     },
     
+    /**
+     * Expose method to set options after initialize
+     *
+     * */
+    
     set: function(options){
       this.options = _.extend({
         title: null,
