@@ -112,7 +112,8 @@
 
       //Insert the main content if it's a view
       if (content.$el) {
-        $el.find('.modal-body').html(content.render().$el);
+        content.render();
+        $el.find('.modal-body').html(content.$el);
       }
 
       if (options.animate) $el.addClass('fade');
