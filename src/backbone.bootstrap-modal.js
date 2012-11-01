@@ -84,15 +84,7 @@
      * @param {Function} [options.template]   Compiled underscore template to override the default one
      */
     initialize: function(options) {
-      this.options = _.extend({
-        title: null,
-        okText: 'OK',
-        cancelText: 'Cancel',
-        allowCancel: true,
-        escape: true,
-        animate: false,
-        template: template
-      }, options);
+      this.set(options);
     },
 
     /**
@@ -121,6 +113,23 @@
       this.isRendered = true;
 
       return this;
+    },
+    
+    /**
+     * Expose method to set options after initialize
+     *
+     * */
+    
+    set: function(options){
+      this.options = _.extend({
+        title: null,
+        okText: 'OK',
+        cancelText: 'Cancel',
+        allowCancel: true,
+        escape: true,
+        animate: false,
+        template: template
+      }, options);
     },
 
     /**
