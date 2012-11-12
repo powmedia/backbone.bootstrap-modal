@@ -143,7 +143,7 @@
 
       //Focus OK button
       $el.one('shown', function() {
-        if (this.options.focusOk) {
+        if (self.options.focusOk) {
           $el.find('.btn.ok').focus();
         }
 
