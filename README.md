@@ -32,18 +32,18 @@ Fired when the modal has finished animating out
 ##Events in the view
 You can listen to the events triggered by the modal inside the Backbone.View
 
-   var view = new Backbone.View({
-       initialize: function () {
-           this.bind("ok", okClicked);
-       },
+    var view = new Backbone.View({
+        initialize: function () {
+            this.bind("ok", okClicked);
+        },
 
-       okClicked: function (modal) {
-           alert("Ok was clicked");
-           modal.close();
-       }
-   });
+        okClicked: function (modal) {
+            alert("Ok was clicked");
+            modal.close();
+        }
+    });
 
-   var modal = new Backbone.BootstrapModal({ content: view }).open();
+    var modal = new Backbone.BootstrapModal({ content: view }).open();
 
 ##Methods
 
