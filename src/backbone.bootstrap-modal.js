@@ -55,7 +55,7 @@
 
         this.trigger('cancel');
 
-        if (this.option.content && this.options.content.trigger) {
+        if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel');
         }
       },
@@ -64,7 +64,7 @@
 
         this.trigger('cancel');
 
-        if (this.option.content && this.options.content.trigger) {
+        if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel');
         }
       },
@@ -73,7 +73,7 @@
 
         this.trigger('ok');
 
-        if (this.option.content && this.options.content.trigger) {
+        if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('ok');
         }
 
