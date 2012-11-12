@@ -54,16 +54,29 @@
         event.preventDefault();
 
         this.trigger('cancel');
+
+        if (this.option.content && this.options.content.trigger) {
+          this.options.content.trigger('cancel');
+        }
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
         this.trigger('cancel');
+
+        if (this.option.content && this.options.content.trigger) {
+          this.options.content.trigger('cancel');
+        }
       },
       'click .ok': function(event) {
         event.preventDefault();
 
         this.trigger('ok');
+
+        if (this.option.content && this.options.content.trigger) {
+          this.options.content.trigger('ok');
+        }
+
         this.close();
       }
     },
