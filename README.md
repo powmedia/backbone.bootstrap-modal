@@ -39,7 +39,7 @@ You can listen to the events triggered by the modal inside the Backbone.View
 
         okClicked: function (modal) {
             alert("Ok was clicked");
-            modal.close();
+            modal.preventClose();
         }
     });
 
