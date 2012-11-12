@@ -87,6 +87,7 @@
       this.options = _.extend({
         title: null,
         okText: 'OK',
+        focusOk: true,
         cancelText: 'Cancel',
         allowCancel: true,
         escape: true,
@@ -142,7 +143,9 @@
 
       //Focus OK button
       $el.one('shown', function() {
-        $el.find('.btn.ok').focus();
+        if (this.options.focusOk) {
+          $el.find('.btn.ok').focus();
+        }
 
         self.trigger('shown');
       });
