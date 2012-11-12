@@ -53,7 +53,7 @@ Set up the modal with the following options:
 - {String|View} [options.content] Modal content. Default: none
 - {String} [options.title]        Title. Default: none
 - {String} [options.okText]       Text for the OK button. Default: 'OK'
-- {Boolean} [options.focuOk]      Wether the 'OK' button should have the focus or not. Default: true
+- {Boolean} [options.focusOk]      Wether the 'OK' button should have the focus or not. Default: true
 - {Boolean} [options.okCloses]    Wether the modal should close on 'OK' click or not. Default: true
 - {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
 - {Boolean} [options.allowCancel] Whether the modal can be closed, other than - OK. Default: true
