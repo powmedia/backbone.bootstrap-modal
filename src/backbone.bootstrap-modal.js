@@ -193,13 +193,13 @@
         return;
       }
 
-      $el.modal('hide');
-
       $el.one('hidden', function() {
         self.remove();
 
         self.trigger('hidden');
       });
+
+      $el.modal('hide');
 
       Modal.count--;
     },
