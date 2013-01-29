@@ -60,7 +60,35 @@ Set up the modal with the following options:
 - {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal- true, but false if options.cancellable is true
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
+- {Number|String} [options.width] Sets the width of the modal if needed.
+- {Boolean} [options.backdrop]    Whether to disable the backdrop or use default behaviour.
 
+###Animation
+
+The animation property can be filled with a function to implement custom effects. This animation uses the jQuery.transit plugin for animation the modal.
+
+    Backbone.BootstrapModal({
+        animation: function (action) {
+            var self = this;
+
+            if (action === "close") {
+                $(this).transit({
+                    scale: 0
+                }, function () {
+                    self.modal("hide");
+                });
+
+                return;
+            }
+
+            $(this).css({
+                scale: 0
+            });
+
+            $(this).transit({
+                scale: 1
+            });
+    });
 
 ###modal.open([cb])
 Renders and opens the modal, running the optional callback if the 'OK' button is pressed
