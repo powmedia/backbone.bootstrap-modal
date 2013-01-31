@@ -32,7 +32,7 @@
       </div>\
     <% } %>\
     <div class="modal-body">{{content}}</div>\
-    <% if (okText != false && !allowCancel) { %>\
+    <% if (okText !== false || cancelText !== false) { %>\
     <div class="modal-footer">\
       <% if (allowCancel) { %>\
         <% if (cancelText) { %>\
