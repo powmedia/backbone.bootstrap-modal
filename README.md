@@ -60,7 +60,7 @@ Set up the modal with the following options:
 - {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal- true, but false if options.cancellable is true
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
-- {Object} [options.modalOptions] Options to pass directly to bootstrap.modal. See [bootstrap-modal options](https://github.com/jschr/bootstrap-modal#options)
+- {Object} [options.modalOptions] Options to pass directly to bootstrap-modal
 
 
 ###modal.open([cb])
