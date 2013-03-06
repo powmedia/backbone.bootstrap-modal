@@ -12,6 +12,9 @@
   "jam": {
     "dependencies": {
       "bootstrap": null
-    }
+    },
+    "shim": {
+      "deps": ["jquery", "underscore", "backbone"],
+      "exports": "Backbone.BootstrapModal"
   }
 }
