@@ -6,7 +6,7 @@
   },
   "version": "1.0.0",
   "dependencies": {
-    "backbone": "0.9.10"
+    "backbone": ">=0.9.10"
   },
   "main": "src/backbone.bootstrap-modal.js",
   "jam": {
