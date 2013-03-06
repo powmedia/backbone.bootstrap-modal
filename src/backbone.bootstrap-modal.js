@@ -152,10 +152,10 @@
           $el = this.$el;
 
       //Create it
-      $el.modal({
+      $el.modal(_.extend({
         keyboard: this.options.allowCancel,
         backdrop: this.options.allowCancel ? true : 'static'
-      });
+      }, this.options.modalOptions));
 
       //Focus OK button
       $el.one('shown', function() {
