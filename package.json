@@ -14,7 +14,7 @@
       "bootstrap": null
     },
     "shim": {
-      "deps": ["jquery", "underscore", "backbone"],
+      "deps": ["jquery", "underscore", "backbone", "exports"],
       "exports": "Backbone.BootstrapModal"
   }
 }
