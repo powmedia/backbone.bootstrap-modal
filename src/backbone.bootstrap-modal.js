@@ -225,8 +225,8 @@
       }
 
       $el.one('hidden', function onHidden(e) {
-        // Ignore events propagated from bootstrap tooltips
-        if($(e.target).attr('data-toggle') === 'tooltip'){
+        // Ignore events propagated from interior objects, like bootstrap tooltips
+        if(e.target !== e.currentTarget){
           return $el.one('hidden', onHidden);
         }
         self.remove();
