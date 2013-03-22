@@ -108,6 +108,7 @@
         allowCancel: true,
         escape: true,
         animate: false,
+        focusElement: null,
         template: template
       }, options);
     },
@@ -162,6 +163,10 @@
         if (self.options.focusOk) {
           $el.find('.btn.ok').focus();
         }
+        
+        if (self.options.focusElement) {
+          $el.find(self.options.focusElement).focus();
+        }
 
         if (self.options.content && self.options.content.trigger) {
           self.options.content.trigger('shown', self);
@@ -195,6 +200,8 @@
             e.which == 27 && self.options.content.trigger('shown', self);
           }
         });
+        
+        $el.trigger('shown');
       }
 
       this.on('cancel', function() {
