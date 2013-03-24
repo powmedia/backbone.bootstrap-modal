@@ -25,7 +25,7 @@
     <% if (title) { %>\
       <div class="modal-header">\
         <% if (allowCancel) { %>\
-          <a class="close">×</a>\
+          <a class="close">&times;</a>\
         <% } %>\
         <h3>{{title}}</h3>\
       </div>\
