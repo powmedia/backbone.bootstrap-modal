@@ -32,6 +32,9 @@
     <% } %>\
     <div class="modal-body">{{content}}</div>\
     <div class="modal-footer">\
+      <% if (optionText) { %>\
+        <a href="#" class="btn option {{optionClass}}">{{optionText}}</a>\
+      <% } %>\
       <% if (allowCancel) { %>\
         <% if (cancelText) { %>\
           <a href="#" class="btn cancel">{{cancelText}}</a>\
@@ -50,6 +53,15 @@
     className: 'modal',
 
     events: {
+      'click .option': function(event) {
+        event.preventDefault();
+
+        this.trigger('option');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('option', this);
+        }
+      },
       'click .close': function(event) {
         event.preventDefault();
 
@@ -93,6 +105,8 @@
      * @param {String} [options.title]        Title. Default: none
      * @param {String} [options.okText]       Text for the OK button. Default: 'OK'
      * @param {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
+     * @param {String} [options.optionText]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
+     * @param {String} [options.optionClass]  Class for the optional third button. Default: ''.
      * @param {Boolean} [options.allowCancel  Whether the modal can be closed, other than by pressing OK. Default: true
      * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
      * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
@@ -105,6 +119,8 @@
         focusOk: true,
         okCloses: true,
         cancelText: 'Cancel',
+        optionText: false,
+        optionClass: '',
         allowCancel: true,
         escape: true,
         animate: false,
