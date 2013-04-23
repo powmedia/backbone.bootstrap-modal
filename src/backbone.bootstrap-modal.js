@@ -34,6 +34,9 @@
     <div class="modal-body">{{content}}</div>\
     <% if (showFooter) { %>\
       <div class="modal-footer">\
+        <% if (optionText) { %>\
+          <a href="#" class="btn option {{optionClass}}">{{optionText}}</a>\
+        <% } %>\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
             <a href="#" class="btn cancel">{{cancelText}}</a>\
@@ -54,6 +57,15 @@
     className: 'modal',
 
     events: {
+      'click .option': function(event) {
+        event.preventDefault();
+
+        this.trigger('option');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('option', this);
+        }
+      },
       'click .close': function(event) {
         event.preventDefault();
 
@@ -108,6 +120,7 @@
      * @see http://twitter.github.com/bootstrap/javascript.html#modals
      *
      * @param {Object} options
+<<<<<<< HEAD
      * @param {String|View} [options.content]     Modal content. Default: none
      * @param {String} [options.title]            Title. Default: none
      * @param {String} [options.okText]           Text for the OK button. Default: 'OK'
@@ -117,6 +130,18 @@
      * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
      * @param {Function} [options.template]       Compiled underscore template to override the default one
      * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
+=======
+     * @param {String|View} [options.content] Modal content. Default: none
+     * @param {String} [options.title]        Title. Default: none
+     * @param {String} [options.okText]       Text for the OK button. Default: 'OK'
+     * @param {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
+     * @param {String} [options.optionText]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
+     * @param {String} [options.optionClass]  Class for the optional third button. Default: ''.
+     * @param {Boolean} [options.allowCancel  Whether the modal can be closed, other than by pressing OK. Default: true
+     * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
+     * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
+     * @param {Function} [options.template]   Compiled underscore template to override the default one
+>>>>>>> add optionClass and optionText
      */
     initialize: function(options) {
       this.options = _.extend({
@@ -125,7 +150,12 @@
         focusOk: true,
         okCloses: true,
         cancelText: 'Cancel',
+<<<<<<< HEAD
         showFooter: true,
+=======
+        optionText: false,
+        optionClass: '',
+>>>>>>> add optionClass and optionText
         allowCancel: true,
         escape: true,
         animate: false,
