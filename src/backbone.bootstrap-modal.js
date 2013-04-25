@@ -13,13 +13,14 @@
  * ok: The user clicked OK
  */
 (function($, _, Backbone) {
+    'use strict';
 
   //Set custom template settings
   var _interpolateBackup = _.templateSettings;
   _.templateSettings = {
     interpolate: /\{\{(.+?)\}\}/g,
     evaluate: /<%([\s\S]+?)%>/g
-  }
+  };
 
   var template = _.template('\
     <% if (title) { %>\
@@ -120,12 +121,13 @@
     render: function() {
       var $el = this.$el,
           options = this.options,
-          content = options.content;
+          content = options.content,
+          $content;
 
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      $content = this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content.$el) {
@@ -133,7 +135,7 @@
         $el.find('.modal-body').html(content.$el);
       }
 
-      if (options.animate) $el.addClass('fade');
+      if (options.animate) { $el.addClass('fade'); }
 
       this.isRendered = true;
 
@@ -268,7 +270,7 @@
   if (typeof define === 'function' && define.amd) {
     return define(function() {
       Backbone.BootstrapModal = Modal;
-    })
+    });
   }
 
   //Regular; add to Backbone.Bootstrap.Modal
