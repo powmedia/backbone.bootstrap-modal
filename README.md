@@ -56,8 +56,13 @@ Set up the modal with the following options:
 - {Boolean} [options.focusOk]      Wether the 'OK' button should have the focus or not. Default: true
 - {Boolean} [options.okCloses]    Wether the modal should close on 'OK' click or not. Default: true
 - {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
-- {String} [options.optionText]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
-- {String} [options.optionClass]  Class for the optional third button. Default: ''.
+- {String} [options.option1Text]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
+- {String} [options.option1Class]  Class for the optional third button. Default: ''.
+- {String} [options.option2Text]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
+- {String} [options.option2Class]  Class for the optional third button. Default: ''.
+- {String} [options.option3Text]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
+- {String} [options.option3Class]  Class for the optional third button. Default: ''.
+- {Array} [options.optionButtons] Objects containing properties for additional buttons. {text: String, class: String, event: String}
 - {Boolean} [options.allowCancel] Whether the modal can be closed, other than - OK. Default: true
 - {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal- true, but false if options.cancellable is true
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
