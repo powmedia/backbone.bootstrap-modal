@@ -34,8 +34,10 @@
     <div class="modal-body">{{content}}</div>\
     <% if (showFooter) { %>\
       <div class="modal-footer">\
-        <% if (optionText) { %>\
-          <a href="#" class="btn option {{optionClass}}">{{optionText}}</a>\
+        <% if (optionButtons.length > 0) { %>\
+          <% _.each(optionButtons, function(optionButton, index) { %>\
+            <a href="#" class="btn optionButton {{optionButton.class}}" data-event="{{optionButton.event}}">{{optionButton.text}}</a>\
+          <% }) %>\
         <% } %>\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
@@ -57,15 +59,17 @@
     className: 'modal',
 
     events: {
-      'click .option': function(event) {
-        event.preventDefault();
+	  'click .optionButton': function(event) {
+	    event.preventDefault();
 
-        this.trigger('option');
+	    var event = $(event.target).data('event')
 
-        if (this.options.content && this.options.content.trigger) {
-          this.options.content.trigger('option', this);
-        }
-      },
+	    this.trigger(event);
+
+	    if (this.options.content && this.options.content.trigger) {
+	      this.options.content.trigger(event, this);
+	    }
+	  },
       'click .close': function(event) {
         event.preventDefault();
 
@@ -135,8 +139,7 @@
      * @param {String} [options.title]        Title. Default: none
      * @param {String} [options.okText]       Text for the OK button. Default: 'OK'
      * @param {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
-     * @param {String} [options.optionText]   Text for the optional third button. Default: false. If passed a string value, the button will be desplayed
-     * @param {String} [options.optionClass]  Class for the optional third button. Default: ''.
+     * @param {String} [options.optionButtons]   Array of properties objects for additional buttons. {text: String, class: String, event: String}
      * @param {Boolean} [options.allowCancel  Whether the modal can be closed, other than by pressing OK. Default: true
      * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
      * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
@@ -151,11 +154,15 @@
         okCloses: true,
         cancelText: 'Cancel',
 <<<<<<< HEAD
+<<<<<<< HEAD
         showFooter: true,
 =======
         optionText: false,
         optionClass: '',
 >>>>>>> add optionClass and optionText
+=======
+        optionButtons: [],
+>>>>>>> Better solution for adding optional modal-footer buttons
         allowCancel: true,
         escape: true,
         animate: false,
