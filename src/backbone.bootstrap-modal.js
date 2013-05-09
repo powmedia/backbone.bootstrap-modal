@@ -58,12 +58,12 @@
 	  'click .optionButton': function(event) {
 	    event.preventDefault();
 
-	    var event = $(event.target).data('event')
+	    var eventTrigger = $(event.target).data('event')
 
-	    this.trigger(event);
+	    this.trigger(eventTrigger);
 
 	    if (this.options.content && this.options.content.trigger) {
-	      this.options.content.trigger(event, this);
+	      this.options.content.trigger(eventTrigger, this);
 	    }
 	  },
       'click .close': function(event) {
