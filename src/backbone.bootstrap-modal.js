@@ -1,6 +1,6 @@
 /**
  * Bootstrap Modal wrapper for use with Backbone.
- * 
+ *
  * Takes care of instantiation, manages multiple modals,
  * adds several options and removes the element from the DOM when closed
  *
@@ -37,13 +37,13 @@
           <a href="#" class="btn cancel">{{cancelText}}</a>\
         <% } %>\
       <% } %>\
-      <a href="#" class="btn ok btn-primary">{{okText}}</a>\
+      <a href="#" class="btn ok btn-{{okButtonType}}">{{okText}}</a>\
     </div>\
   ');
 
   //Reset to users' template settings
   _.templateSettings = _interpolateBackup;
-  
+
 
   var Modal = Backbone.View.extend({
 
@@ -108,13 +108,14 @@
         allowCancel: true,
         escape: true,
         animate: false,
-        template: template
+        template: template,
+        okButtonType: 'primary'
       }, options);
     },
 
     /**
      * Creates the DOM element
-     * 
+     *
      * @api private
      */
     render: function() {
@@ -187,7 +188,7 @@
 
           self.trigger('cancel');
         });
-        
+
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
@@ -207,7 +208,7 @@
       if (cb) {
         self.on('ok', cb);
       }
-      
+
       return this;
     },
 
