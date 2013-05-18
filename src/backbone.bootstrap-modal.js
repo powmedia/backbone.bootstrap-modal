@@ -34,7 +34,7 @@
     <div class="modal-footer">\
       <% if (allowCancel) { %>\
         <% if (cancelText) { %>\
-          <a href="#" class="btn cancel">{{cancelText}}</a>\
+          <a href="#" class="btn cancel <% if (cancelButtonType) { %>btn-{{cancelButtonType}}<% } %>">{{cancelText}}</a>\
         <% } %>\
       <% } %>\
       <a href="#" class="btn ok btn-{{okButtonType}}">{{okText}}</a>\
@@ -105,11 +105,12 @@
         focusOk: true,
         okCloses: true,
         cancelText: 'Cancel',
+        okButtonType: 'primary',
+        cancelButtonType: null,
         allowCancel: true,
         escape: true,
         animate: false,
-        template: template,
-        okButtonType: 'primary'
+        template: template
       }, options);
     },
 
