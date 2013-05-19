@@ -245,7 +245,7 @@
           self.options.content.trigger('hidden', self);
         }
 
-        if (this.options.waitText && $.fn.button) {
+        if (self.options.waitText && $.fn.button) {
           $el.find('.btn.ok').button('reset');
         }
 
