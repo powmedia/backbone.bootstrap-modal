@@ -1,6 +1,6 @@
 /**
  * Bootstrap Modal wrapper for use with Backbone.
- * 
+ *
  * Takes care of instantiation, manages multiple modals,
  * adds several options and removes the element from the DOM when closed
  *
@@ -19,7 +19,7 @@
   _.templateSettings = {
     interpolate: /\{\{(.+?)\}\}/g,
     evaluate: /<%([\s\S]+?)%>/g
-  }
+  };
 
   var template = _.template('\
     <% if (title) { %>\
@@ -37,13 +37,13 @@
           <a href="#" class="btn cancel">{{cancelText}}</a>\
         <% } %>\
       <% } %>\
-      <a href="#" class="btn ok btn-primary">{{okText}}</a>\
+      <a href="#" data-loading-text="{{waitText}}" class="btn ok btn-primary">{{okText}}</a>\
     </div>\
   ');
 
   //Reset to users' template settings
   _.templateSettings = _interpolateBackup;
-  
+
 
   var Modal = Backbone.View.extend({
 
@@ -71,14 +71,23 @@
       'click .ok': function(event) {
         event.preventDefault();
 
-        this.trigger('ok');
+        var $btn = $(event.currentTarget);
 
-        if (this.options.content && this.options.content.trigger) {
-          this.options.content.trigger('ok', this);
-        }
+        if (!$btn.hasClass('disabled')) {
 
-        if (this.options.okCloses) {
-          this.close();
+          if (this.options.waitText && $.fn.button) {
+            $btn.button('loading');
+          }
+
+          this.trigger('ok');
+
+          if (this.options.content && this.options.content.trigger) {
+            this.options.content.trigger('ok', this);
+          }
+
+          if (this.options.okCloses) {
+            this.close();
+          }
         }
       }
     },
@@ -108,13 +117,14 @@
         allowCancel: true,
         escape: true,
         animate: false,
-        template: template
+        template: template,
+        waitText: ''
       }, options);
     },
 
     /**
      * Creates the DOM element
-     * 
+     *
      * @api private
      */
     render: function() {
@@ -125,12 +135,12 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content.$el) {
         content.render();
-        $el.find('.modal-body').html(content.$el);
+        this.$content.html(content.$el);
       }
 
       if (options.animate) $el.addClass('fade');
@@ -187,7 +197,7 @@
 
           self.trigger('cancel');
         });
-        
+
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
@@ -207,7 +217,7 @@
       if (cb) {
         self.on('ok', cb);
       }
-      
+
       return this;
     },
 
@@ -233,6 +243,10 @@
 
         if (self.options.content && self.options.content.trigger) {
           self.options.content.trigger('hidden', self);
+        }
+
+        if (this.options.waitText && $.fn.button) {
+          $el.find('.btn.ok').button('reset');
         }
 
         self.trigger('hidden');
@@ -268,7 +282,7 @@
   if (typeof define === 'function' && define.amd) {
     return define(function() {
       Backbone.BootstrapModal = Modal;
-    })
+    });
   }
 
   //Regular; add to Backbone.Bootstrap.Modal
