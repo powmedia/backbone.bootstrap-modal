@@ -106,6 +106,7 @@
          * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
          * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
          * @param {Function} [options.template]   Compiled underscore template to override the default one
+         * @param {String} [options.waitText]     Text for the loading text when ok button is pressed. Requires bootstrap button. Default: none
          */
         initialize: function (options) {
             this.options = _.extend({
