@@ -80,3 +80,6 @@ Prevents the modal from closing. Can be called from within a 'ok' or 'cancel' ev
       //Do some validation etc.
       if (!isValid) modal.preventClose();
     });
+
+##Live demo
+You can read a short article and see live demo on [symfony-world](http://symfony-world.blogspot.com/2013/08/backbone-bootstrap-modal-example.html) blog.
