@@ -1,14 +1,14 @@
 /**
  * Bootstrap Modal wrapper for use with Backbone.
- * 
+ *
  * Takes care of instantiation, manages multiple modals,
  * adds several options and removes the element from the DOM when closed
  *
  * @author Charles Davison <charlie@powmedia.co.uk>
  *
  * Events:
- * shown: Fired when the modal has finished animating in
- * hidden: Fired when the modal has finished animating out
+ * shown.bs.modal: Fired when the modal has finished animating in
+ * hidden.bs.modal: Fired when the modal has finished animating out
  * cancel: The user dismissed the modal
  * ok: The user clicked OK
  */
@@ -22,12 +22,13 @@
   }
 
   var template = _.template('\
+    <div class="modal-dialog"><div class="modal-content">\
     <% if (title) { %>\
       <div class="modal-header">\
         <% if (allowCancel) { %>\
           <a class="close">&times;</a>\
         <% } %>\
-        <h3>{{title}}</h3>\
+        <h4>{{title}}</h4>\
       </div>\
     <% } %>\
     <div class="modal-body">{{content}}</div>\
@@ -39,11 +40,12 @@
       <% } %>\
       <a href="#" class="btn ok btn-primary">{{okText}}</a>\
     </div>\
+    </div></div>\
   ');
 
   //Reset to users' template settings
   _.templateSettings = _interpolateBackup;
-  
+
 
   var Modal = Backbone.View.extend({
 
@@ -114,7 +116,7 @@
 
     /**
      * Creates the DOM element
-     * 
+     *
      * @api private
      */
     render: function() {
@@ -158,16 +160,16 @@
       }, this.options.modalOptions));
 
       //Focus OK button
-      $el.one('shown', function() {
+      $el.one('shown.bs.modal', function() {
         if (self.options.focusOk) {
           $el.find('.btn.ok').focus();
         }
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('shown', self);
+          self.options.content.trigger('shown.bs.modal', self);
         }
 
-        self.trigger('shown');
+        self.trigger('shown.bs.modal');
       });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
@@ -187,12 +189,12 @@
 
           self.trigger('cancel');
         });
-        
+
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown', self);
+            e.which == 27 && self.options.content.trigger('shown.bs.modal', self);
           }
         });
       }
@@ -207,7 +209,7 @@
       if (cb) {
         self.on('ok', cb);
       }
-      
+
       return this;
     },
 
@@ -224,18 +226,18 @@
         return;
       }
 
-      $el.one('hidden', function onHidden(e) {
+      $el.one('hidden.bs.modal', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
         if(e.target !== e.currentTarget){
-          return $el.one('hidden', onHidden);
+          return $el.one('hidden.bs.modal', onHidden);
         }
         self.remove();
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('hidden', self);
+          self.options.content.trigger('hidden.bs.modal', self);
         }
 
-        self.trigger('hidden');
+        self.trigger('hidden.bs.modal');
       });
 
       $el.modal('hide');
