@@ -1,6 +1,6 @@
 /**
  * Bootstrap Modal wrapper for use with Backbone.
- * 
+ *
  * Takes care of instantiation, manages multiple modals,
  * adds several options and removes the element from the DOM when closed
  *
@@ -22,28 +22,32 @@
   }
 
   var template = _.template('\
-    <% if (title) { %>\
-      <div class="modal-header">\
-        <% if (allowCancel) { %>\
-          <a class="close">&times;</a>\
+    <div class="modal-dialog">\
+      <div class="modal-content">\
+        <% if (title) { %>\
+          <div class="modal-header">\
+            <% if (allowCancel) { %>\
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+            <% } %>\
+            <h4 class="modal-title">{{title}}</h4>\
+          </div>\
         <% } %>\
-        <h3>{{title}}</h3>\
+        <div class="modal-body">{{content}}</div>\
+        <div class="modal-footer">\
+          <% if (allowCancel) { %>\
+            <% if (cancelText) { %>\
+              <button type="button" class="cancel btn btn-default" data-dismiss="modal">{{cancelText}}</button>\
+            <% } %>\
+          <% } %>\
+          <button type="button" class="ok btn btn-primary">{{okText}}</button>\
+        </div>\
       </div>\
-    <% } %>\
-    <div class="modal-body">{{content}}</div>\
-    <div class="modal-footer">\
-      <% if (allowCancel) { %>\
-        <% if (cancelText) { %>\
-          <a href="#" class="btn cancel">{{cancelText}}</a>\
-        <% } %>\
-      <% } %>\
-      <a href="#" class="btn ok btn-primary">{{okText}}</a>\
     </div>\
   ');
 
   //Reset to users' template settings
   _.templateSettings = _interpolateBackup;
-  
+
 
   var Modal = Backbone.View.extend({
 
@@ -114,7 +118,7 @@
 
     /**
      * Creates the DOM element
-     * 
+     *
      * @api private
      */
     render: function() {
@@ -187,7 +191,7 @@
 
           self.trigger('cancel');
         });
-        
+
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
@@ -207,7 +211,7 @@
       if (cb) {
         self.on('ok', cb);
       }
-      
+
       return this;
     },
 
