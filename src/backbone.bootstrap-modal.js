@@ -91,10 +91,11 @@
         okCloses: true,
         cancelText: 'Cancel',
         allowCancel: true,
+        classHeader: true,
+        width: true,
         escape: true,
         animate: false,
-        template: template,
-        width: false
+        template: template
       }, options);
     },
     /**

@@ -51,6 +51,8 @@ You can listen to the events triggered by the modal inside the Backbone.View
 Set up the modal with the following options:
 
 - {String|View} [options.content] Modal content. Default: none
+- {String} [options.classHeader]  Add class to modal header. Default none.
+- {String} [options.width]        Override bootstrap width.Default none.
 - {String} [options.title]        Title. Default: none
 - {String} [options.okText]       Text for the OK button. Default: 'OK'
 - {Boolean} [options.focusOk]      Wether the 'OK' button should have the focus or not. Default: true
