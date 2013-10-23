@@ -1,9 +1,14 @@
 {
   "name": "backbone.bootstrap-modal",
   "description": "Bootstrap Modal wrapper for use with Backbone",
-  "author": {
-    "name": "Charles Davison"
-  },
+  "author": [
+    {
+      name: "Stefan Norberg"
+    },
+    {
+      name: "Obada Kadri"
+    }
+  ],
   "version": "0.9.0",
   "dependencies": {
     "backbone": ">=0.9.10"
