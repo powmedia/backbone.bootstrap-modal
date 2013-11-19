@@ -1,3 +1,4 @@
+/*jshint multistr: true */
 /**
  * Bootstrap Modal wrapper for use with Backbone.
  * 
@@ -19,30 +20,34 @@
   _.templateSettings = {
     interpolate: /\{\{(.+?)\}\}/g,
     evaluate: /<%([\s\S]+?)%>/g
-  }
+  };
 
   var template = _.template('\
-    <% if (title) { %>\
-      <div class="modal-header">\
-        <% if (allowCancel) { %>\
-          <a class="close">&times;</a>\
-        <% } %>\
-        <h3>{{title}}</h3>\
-      </div>\
-    <% } %>\
-    <div class="modal-body">{{content}}</div>\
-    <div class="modal-footer">\
-      <% if (optionButtons.length > 0) { %>\
-      	<% _.each(optionButtons, function(optionButton, index) { %>\
-        	<a href="#" class="btn optionButton {{optionButton.class}}" data-event="{{optionButton.event}}">{{optionButton.text}}</a>\
-      	<% }) %>\
-      <% } %>\
-      <% if (allowCancel) { %>\
-        <% if (cancelText) { %>\
-          <a href="#" class="btn cancel">{{cancelText}}</a>\
-        <% } %>\
-      <% } %>\
-      <a href="#" class="btn ok btn-primary">{{okText}}</a>\
+    <div class="modal-dialog">\
+        <div class="modal-content">\
+            <% if (title) { %>\
+              <div class="modal-header">\
+                <% if (allowCancel) { %>\
+                  <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>\
+                <% } %>\
+                <h3>{{title}}</h3>\
+              </div>\
+            <% } %>\
+            <div class="modal-body">{{content}}</div>\
+            <div class="modal-footer">\
+              <% if (optionButtons.length > 0) { %>\
+                  <% _.each(optionButtons, function(optionButton, index) { %>\
+                    <a href="#" class="btn optionButton {{optionButton.class}}" data-event="{{optionButton.event}}">{{optionButton.text}}</a>\
+                  <% }) %>\
+              <% } %>\
+              <% if (allowCancel) { %>\
+                <% if (cancelText) { %>\
+                  <a href="#" class="btn cancel">{{cancelText}}</a>\
+                <% } %>\
+              <% } %>\
+              <a href="#" class="btn ok btn-primary">{{okText}}</a>\
+            </div>\
+        </div>\
     </div>\
   ');
 
