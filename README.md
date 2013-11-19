@@ -62,7 +62,7 @@ Set up the modal with the following options:
 - {Boolean} [options.animate]     Whether to animate in/out. Default: false
 - {Function} [options.template]   Compiled underscore template to override the default one
 - {Object} [options.modalOptions] Options to pass directly to bootstrap-modal
-
+- {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
 
 ###modal.open([cb])
 Renders and opens the modal, running the optional callback if the 'OK' button is pressed
@@ -81,3 +81,6 @@ Prevents the modal from closing. Can be called from within a 'ok' or 'cancel' ev
       //Do some validation etc.
       if (!isValid) modal.preventClose();
     });
+
+##Live demo
+You can read a short article and see live demo on [symfony-world](http://symfony-world.blogspot.com/2013/08/backbone-bootstrap-modal-example.html) blog.

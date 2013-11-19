@@ -4,7 +4,15 @@
   "author": {
     "name": "Charles Davison"
   },
-  "version": "0.9.0",
+  "contributors": [
+    {
+      "name": "Stefan Norberg"
+    },
+    {
+      "name": "Christopher Thielen"
+    }
+  ],
+  "version": "0.9.1",
   "dependencies": {
     "backbone": ">=0.9.10"
   },

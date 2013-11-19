@@ -96,6 +96,21 @@
         if (this.options.okCloses) {
           this.close();
         }
+      },
+      'keypress': function(event) {
+        if (this.options.enterTriggersOk && event.which == 13) {
+          event.preventDefault();
+
+          this.trigger('ok');
+
+          if (this.options.content && this.options.content.trigger) {
+            this.options.content.trigger('ok', this);
+          }
+
+          if (this.options.okCloses) {
+            this.close();
+          }
+        }
       }
     },
 
@@ -105,15 +120,16 @@
      * @see http://twitter.github.com/bootstrap/javascript.html#modals
      *
      * @param {Object} options
-     * @param {String|View} [options.content] Modal content. Default: none
-     * @param {String} [options.title]        Title. Default: none
-     * @param {String} [options.okText]       Text for the OK button. Default: 'OK'
-     * @param {String} [options.cancelText]   Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
-     * @param {String} [options.optionButtons]   Array of properties objects for additional buttons. {text: String, class: String, event: String}
-     * @param {Boolean} [options.allowCancel  Whether the modal can be closed, other than by pressing OK. Default: true
-     * @param {Boolean} [options.escape]      Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
-     * @param {Boolean} [options.animate]     Whether to animate in/out. Default: false
-     * @param {Function} [options.template]   Compiled underscore template to override the default one
+     * @param {String|View} [options.content]     Modal content. Default: none
+     * @param {String} [options.title]            Title. Default: none
+     * @param {String} [options.okText]           Text for the OK button. Default: 'OK'
+     * @param {String} [options.cancelText]       Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
+     * @param {String} [options.optionButtons]    Array of properties objects for additional buttons. {text: String, class: String, event: String}
+     * @param {Boolean} [options.allowCancel      Whether the modal can be closed, other than by pressing OK. Default: true
+     * @param {Boolean} [options.escape]          Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
+     * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
+     * @param {Function} [options.template]       Compiled underscore template to override the default one
+     * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
      */
     initialize: function(options) {
       this.options = _.extend({
@@ -126,7 +142,8 @@
         allowCancel: true,
         escape: true,
         animate: false,
-        template: template
+        template: template,
+        enterTriggersOk: false
       }, options);
     },
 
