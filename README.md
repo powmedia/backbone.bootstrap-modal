@@ -23,10 +23,10 @@ The user dismissed the modal (e.g. pressed cancel or Esc etc.)
 ###ok
 The user clicked OK
 
-###shown
+###shown.bs.modal
 Fired when the modal has finished animating in
 
-###hidden
+###hidden.bs.modal
 Fired when the modal has finished animating out
 
 ##Events in the view
