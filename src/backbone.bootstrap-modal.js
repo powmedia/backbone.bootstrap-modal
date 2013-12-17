@@ -19,7 +19,7 @@
   _.templateSettings = {
     interpolate: /\{\{(.+?)\}\}/g,
     evaluate: /<%([\s\S]+?)%>/g
-  }
+  };
 
   var template = _.template('\
     <% if (title) { %>\
