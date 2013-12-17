@@ -95,6 +95,21 @@
             this.close();
           }
         }
+      },
+      'hidden': function(event) {
+        var self = this,
+            $el = this.$el
+        // Ignore events propagated from interior objects, like bootstrap tooltips
+        if(event.target !== event.currentTarget){
+          return $el.one('hidden', onHidden);
+        }
+        self.remove();
+
+        if (self.options.content && self.options.content.trigger) {
+          self.options.content.trigger('hidden', self);
+        }
+
+        self.trigger('hidden');
       }
     },
 
@@ -240,20 +255,6 @@
         this._preventClose = false;
         return;
       }
-
-      $el.one('hidden', function onHidden(e) {
-        // Ignore events propagated from interior objects, like bootstrap tooltips
-        if(e.target !== e.currentTarget){
-          return $el.one('hidden', onHidden);
-        }
-        self.remove();
-
-        if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('hidden', self);
-        }
-
-        self.trigger('hidden');
-      });
 
       $el.modal('hide');
 
