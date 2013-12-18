@@ -164,7 +164,7 @@
       }, this.options.modalOptions));
 
       //Focus OK button
-      $el.one('shown', function() {
+      $el.one('shown.bs.modal', function() {
         if (self.options.focusOk) {
           $el.find('.btn.ok').focus();
         }
@@ -230,7 +230,7 @@
         return;
       }
 
-      $el.one('hidden', function onHidden(e) {
+      $el.one('hidden.bs.model', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
         if(e.target !== e.currentTarget){
           return $el.one('hidden', onHidden);
