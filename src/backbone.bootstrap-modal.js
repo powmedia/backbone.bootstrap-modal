@@ -7,8 +7,8 @@
  * @author Charles Davison <charlie@powmedia.co.uk>
  *
  * Events:
- * shown: Fired when the modal has finished animating in
- * hidden: Fired when the modal has finished animating out
+ * shown.bs.modal: Fired when the modal has finished animating in
+ * hidden.bs.modal: Fired when the modal has finished animating out
  * cancel: The user dismissed the modal
  * ok: The user clicked OK
  */
@@ -186,10 +186,10 @@
         }
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('shown', self);
+          self.options.content.trigger('shown.bs.modal', self);
         }
 
-        self.trigger('shown');
+        self.trigger('shown.bs.modal');
       });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
@@ -214,7 +214,7 @@
           e.which == 27 && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown', self);
+            e.which == 27 && self.options.content.trigger('shown.bs.modal', self);
           }
         });
       }
@@ -249,15 +249,15 @@
       $el.one('hidden.bs.modal', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
         if(e.target !== e.currentTarget){
-          return $el.one('hidden', onHidden);
+          return $el.one('hidden.bs.modal', onHidden);
         }
         self.remove();
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('hidden', self);
+          self.options.content.trigger('hidden.bs.modal', self);
         }
 
-        self.trigger('hidden');
+        self.trigger('hidden.bs.modal');
       });
 
       $el.modal('hide');
