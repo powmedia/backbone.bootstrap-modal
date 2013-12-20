@@ -85,6 +85,19 @@
           this.close();
         }
       },
+      'click': function(event) {
+        if (!this.$el.is($(event.target))) {
+          return;
+        }
+
+        event.preventDefault();
+
+        this.trigger('cancel');
+
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger('cancel', this);
+        }
+      },
       'keypress': function(event) {
         if (this.options.enterTriggersOk && event.which == 13) {
           event.preventDefault();
@@ -202,14 +215,6 @@
       this.$el.css('z-index', elIndex + numModals);
 
       if (this.options.allowCancel) {
-        $backdrop.one('click', function() {
-          if (self.options.content && self.options.content.trigger) {
-            self.options.content.trigger('cancel', self);
-          }
-
-          self.trigger('cancel');
-        });
-
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
