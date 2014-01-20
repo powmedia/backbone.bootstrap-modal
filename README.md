@@ -84,4 +84,4 @@ Prevents the modal from closing. Can be called from within a 'ok' or 'cancel' ev
     });
 
 ##Live demo
-You can read a short article and see live demo on [symfony-world](http://symfony-world.blogspot.com/2013/08/backbone-bootstrap-modal-example.html) blog.
+You can read a short article and see live demo on [sys.exit()](http://sys-exit.blogspot.com/2013/08/backbone-bootstrap-modal-example.html) blog.
