@@ -63,7 +63,7 @@
       'click .optionButton': function(event) {
         event.preventDefault();
 
-        var eventTrigger = $(event.target).data('event')
+        var eventTrigger = $(event.target).data('event');
 
         this.trigger(eventTrigger);
 
@@ -166,7 +166,7 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      var $content = this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content && content.$el) {
@@ -309,7 +309,7 @@
   if (typeof define === 'function' && define.amd) {
     return define(function() {
       Backbone.BootstrapModal = Modal;
-    })
+    });
   }
 
   //Regular; add to Backbone.Bootstrap.Modal
