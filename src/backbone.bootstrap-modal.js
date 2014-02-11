@@ -23,7 +23,6 @@
   };
 
   var template = _.template('\
-<<<<<<< HEAD
     <div class="modal-dialog"><div class="modal-content">\
     <% if (title) { %>\
       <div class="modal-header">\
@@ -43,7 +42,7 @@
         <% } %>\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
-            <a href="#" class="btn cancel">{{cancelText}}</a>\
+            <a href="#" class="btn cancel btn-default">{{cancelText}}</a>\
           <% } %>\
         <% } %>\
         <a href="#" class="btn ok btn-primary">{{okText}}</a>\
@@ -61,17 +60,17 @@
     className: 'modal',
 
     events: {
-	  'click .optionButton': function(event) {
-	    event.preventDefault();
+      'click .optionButton': function(event) {
+        event.preventDefault();
 
-	    var eventTrigger = $(event.target).data('event')
+        var eventTrigger = $(event.target).data('event')
 
-	    this.trigger(eventTrigger);
+        this.trigger(eventTrigger);
 
-	    if (this.options.content && this.options.content.trigger) {
-	      this.options.content.trigger(eventTrigger, this);
-	    }
-	  },
+        if (this.options.content && this.options.content.trigger) {
+          this.options.content.trigger(eventTrigger, this);
+        }
+      },
       'click .close': function(event) {
         event.preventDefault();
 
