@@ -150,7 +150,7 @@
       var $content = this.$content = $el.find('.modal-body')
 
       //Insert the main content if it's a view
-      if (content.$el) {
+      if (content && content.$el) {
         content.render();
         $el.find('.modal-body').html(content.$el);
       }
