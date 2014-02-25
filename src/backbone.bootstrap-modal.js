@@ -8,8 +8,8 @@
  * @author Charles Davison <charlie@powmedia.co.uk>
  *
  * Events:
- * shown.bs.modal: Fired when the modal has finished animating in
- * hidden.bs.modal: Fired when the modal has finished animating out
+ * shown: Fired when the modal has finished animating in
+ * hidden: Fired when the modal has finished animating out
  * cancel: The user dismissed the modal
  * ok: The user clicked OK
  */
@@ -166,7 +166,7 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body');
+      var $content = this.$content = $el.find('.modal-body')
 
       //Insert the main content if it's a view
       if (content && content.$el) {
@@ -205,10 +205,10 @@
         }
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('shown.bs.modal', self);
+          self.options.content.trigger('shown', self);
         }
 
-        self.trigger('shown.bs.modal');
+        self.trigger('shown');
       });
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
@@ -233,7 +233,7 @@
           e.which == 27 && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown.bs.modal', self);
+            e.which == 27 && self.options.content.trigger('shown', self);
           }
         });
       }
@@ -268,15 +268,15 @@
       $el.one('hidden.bs.modal', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
         if(e.target !== e.currentTarget){
-          return $el.one('hidden.bs.modal', onHidden);
+          return $el.one('hidden', onHidden);
         }
         self.remove();
 
         if (self.options.content && self.options.content.trigger) {
-          self.options.content.trigger('hidden.bs.modal', self);
+          self.options.content.trigger('hidden', self);
         }
 
-        self.trigger('hidden.bs.modal');
+        self.trigger('hidden');
       });
 
       $el.modal('hide');
@@ -309,7 +309,7 @@
   if (typeof define === 'function' && define.amd) {
     return define(function() {
       Backbone.BootstrapModal = Modal;
-    });
+    })
   }
 
   //Regular; add to Backbone.Bootstrap.Modal
