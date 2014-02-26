@@ -22,7 +22,7 @@
   };
 
   var template = _.template('\
-    <div class="modal-dialog"><div class="modal-content">\
+    <div class="modal-dialog {{modalClass}}"><div class="modal-content">\
     <% if (title) { %>\
       <div class="modal-header">\
         <% if (allowCancel) { %>\
@@ -129,6 +129,7 @@
         allowCancel: true,
         escape: true,
         animate: false,
+        modalClass: '',
         template: template,
         enterTriggersOk: false,
         center: false
