@@ -130,7 +130,8 @@
         escape: true,
         animate: false,
         template: template,
-        enterTriggersOk: false
+        enterTriggersOk: false,
+        center: false
       }, options);
     },
 
@@ -147,7 +148,7 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      var $content = this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content && content.$el) {
@@ -191,6 +192,11 @@
 
         self.trigger('shown');
       });
+
+      if (this.options.center) {
+        $(window).on("resize", this.centerModal);
+        this.centerModal();
+      }
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
       var numModals = Modal.count,
@@ -266,6 +272,69 @@
     },
 
     /**
+     * Center this modal
+     */
+    centerModal: function() {
+      console.log('resize');
+      $el = this.$el;
+
+      if($el.hasClass('in') === false){
+        $el.show();
+      }
+
+      $el.find('.modal-dialog').css({
+        margin: '0px',
+        position: 'absolute',
+        top: '50%',
+        left: '50%'
+      });
+
+      $el.find('.modal-body').css({
+        'overflow-y': 'auto',
+      });
+
+       $el.find('.modal-footer').css({
+        'margin-top': '0px',
+      });
+
+      var contentHeight = $(window).height() - 60;
+      var headerHeight = $el.find('.modal-header').outerHeight() || 2;
+      var footerHeight = $el.find('.modal-footer').outerHeight() || 2;
+
+      $el.find('.modal-content').css({
+        'max-height': function () {
+          return contentHeight;
+        }
+      });
+
+      $el.find('.modal-body').css({
+        'max-height': function () {
+          return (contentHeight - (headerHeight + footerHeight));
+        }
+      });
+
+      $el.find('.modal-dialog').css({
+        'margin-top': function () {
+          return -($(this).outerHeight() / 2);
+        },
+        'margin-left': function () {
+          return -($(this).outerWidth() / 2);
+        }
+      });
+      if($el.hasClass('in') === false){
+        $el.hide();
+      }
+    },
+
+    /**
+     * Overwrite the default remove method to ensure that the resize binding is destroyed.
+     */
+    remove: function() {
+      $(window).off("resize", this.centerModal);
+      Backbone.View.prototype.remove.apply(this, arguments);
+    },
+
+    /**
      * Stop the modal from closing.
      * Can be called from within a 'close' or 'ok' event listener.
      */
@@ -290,7 +359,7 @@
   if (typeof define === 'function' && define.amd) {
     return define(function() {
       Backbone.BootstrapModal = Modal;
-    })
+    });
   }
 
   //Regular; add to Backbone.Bootstrap.Modal
