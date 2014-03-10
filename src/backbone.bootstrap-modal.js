@@ -173,12 +173,6 @@
       var self = this,
           $el = this.$el;
 
-      //Create it
-      $el.modal(_.extend({
-        keyboard: this.options.allowCancel,
-        backdrop: this.options.allowCancel ? true : 'static'
-      }, this.options.modalOptions));
-
       //Focus OK button
       $el.one('shown.bs.modal', function() {
         if (self.options.focusOk) {
@@ -191,6 +185,12 @@
 
         self.trigger('shown');
       });
+
+      //Create it
+      $el.modal(_.extend({
+        keyboard: this.options.allowCancel,
+        backdrop: this.options.allowCancel ? true : 'static'
+      }, this.options.modalOptions));
 
       //Adjust the modal and backdrop z-index; for dealing with multiple modals
       var numModals = Modal.count,
