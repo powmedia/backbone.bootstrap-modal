@@ -1,0 +1,13 @@
+{
+  "name": "backbone.bootstrap-modal",
+  "main": "src/backbone.bootstrap-modal.js",
+  "version": "0.9.1",
+  "homepage": "https://github.com/powmedia/backbone.bootstrap-modal",
+  "authors": [
+    "Charles Davison"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT"
+}
