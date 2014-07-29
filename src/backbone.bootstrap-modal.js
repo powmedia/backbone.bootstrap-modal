@@ -57,29 +57,29 @@
       'click .close': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
-          this.options.content.trigger('cancel', this);
+          this.options.content.trigger('close', this);
         }
+
+        this.trigger('close');
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel', this);
         }
+
+        this.trigger('cancel');
       },
       'click .ok': function(event) {
         event.preventDefault();
 
-        this.trigger('ok');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('ok', this);
         }
+
+        this.trigger('ok');
 
         if (this.options.okCloses) {
           this.close();
@@ -89,11 +89,11 @@
         if (this.options.enterTriggersOk && event.which == 13) {
           event.preventDefault();
 
-          this.trigger('ok');
-
           if (this.options.content && this.options.content.trigger) {
             this.options.content.trigger('ok', this);
           }
+
+          this.trigger('ok');
 
           if (this.options.okCloses) {
             this.close();
@@ -222,6 +222,10 @@
       this.on('cancel', function() {
         self.close();
       });
+
+      this.on('close', function() {
+        self.close()
+      }
 
       Modal.count++;
 
