@@ -225,7 +225,7 @@
 
       this.on('close', function() {
         self.close()
-      }
+      });
 
       Modal.count++;
 
