@@ -22,7 +22,7 @@
   };
 
   var template = _.template('\
-    <div class="modal-dialog"><div class="modal-content">\
+    <div class="modal-dialog {{extraClass}}"><div class="modal-content">\
     <% if (title) { %>\
       <div class="modal-header">\
         <% if (allowCancel) { %>\
@@ -117,6 +117,7 @@
      * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
      * @param {Function} [options.template]       Compiled underscore template to override the default one
      * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
+     * @param {String} [options.extraClass]       Extra class for modal-dialog. Default: ''
      */
     initialize: function(options) {
       this.options = _.extend({
@@ -130,7 +131,8 @@
         escape: true,
         animate: false,
         template: template,
-        enterTriggersOk: false
+        enterTriggersOk: false,
+        extraClass: ''
       }, options);
     },
 
