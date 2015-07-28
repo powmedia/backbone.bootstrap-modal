@@ -214,7 +214,7 @@
           e.which == 27 && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown', self);
+            e.which == 27 && self.options.content.trigger('cancel', self);
           }
         });
       }
