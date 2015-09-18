@@ -12,7 +12,7 @@ Backbone.BootstrapModal
 
     var view = new Backbone.View({...});
   
-    var modal = new Backbone.BootstrapModal({ content: view }).open();
+    var modal = new BootstrapModal({ content: view }).open();
 
 
 ##Events
@@ -45,11 +45,11 @@ You can listen to the events triggered by the modal inside the Backbone.View
     
     var view = new MyView();
 
-    var modal = new Backbone.BootstrapModal({ content: view }).open();
+    var modal = new BootstrapModal({ content: view }).open();
 
 ##Methods
 
-###new Backbone.BootstrapModal(options)
+###new BootstrapModal(options)
 Set up the modal with the following options:
 
 - {String|View} [options.content] Modal content. Default: none
@@ -76,7 +76,7 @@ Close the modal and remove it from the DOM
 ###modal.preventClose()
 Prevents the modal from closing. Can be called from within a 'ok' or 'cancel' event listener:
 
-    var modal = new Backbone.BootstrapModal().open();
+    var modal = new BootstrapModal().open();
   
     modal.on('ok', function() {
       //Do some validation etc.
