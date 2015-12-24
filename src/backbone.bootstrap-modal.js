@@ -187,7 +187,7 @@
 
       //Create it
       $el.modal(_.extend({
-        keyboard: this.options.allowCancel,
+        keyboard: this.options.escape,
         backdrop: this.options.allowCancel ? true : 'static'
       }, this.options.modalOptions));
 
