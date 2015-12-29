@@ -36,15 +36,10 @@
       <div class="modal-footer">\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
-            <a href="#" class="btn cancel btn-default">{{cancelText}}</a>\
+            <a href="#" class="btn cancel">{{cancelText}}</a>\
           <% } %>\
         <% } %>\
         <a href="#" class="btn ok btn-primary">{{okText}}</a>\
-        <% if (extraButtons) { %>\
-          <% _.each(extraButtons, function(btn){ %>\
-            <a href="#" class="btn {{btn.className}}">{{btn.label}}</a>\
-          <% }) %>\
-        <% } %>\
       </div>\
     <% } %>\
     </div></div>\
@@ -122,7 +117,6 @@
      * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
      * @param {Function} [options.template]       Compiled underscore template to override the default one
      * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
-     * @param {Array} [options.extraButtons]      Array of extra button which will be added after the OK button. Each item is object with label and className properties.
      */
     initialize: function(options) {
       this.options = _.extend({
@@ -136,8 +130,7 @@
         escape: true,
         animate: false,
         template: template,
-        enterTriggersOk: false,
-        extraButtons: []
+        enterTriggersOk: false
       }, options);
     },
 
