@@ -86,7 +86,7 @@
         }
       },
       'keypress': function(event) {
-        if (this.options.enterTriggersOk && event.which == 13) {
+        if (this.options.enterTriggersOk && event.which == 13 && event.target.tagName != 'TEXTAREA') {
           event.preventDefault();
 
           this.trigger('ok');
