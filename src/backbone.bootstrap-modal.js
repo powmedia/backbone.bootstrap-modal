@@ -82,7 +82,7 @@
         }
 
         if (this.options.okCloses) {
-          this.close();
+          this.$el.modal('hide');
         }
       },
       'keypress': function(event) {
@@ -96,7 +96,7 @@
           }
 
           if (this.options.okCloses) {
-            this.close();
+            this.$el.modal('hide');
           }
         }
       }
@@ -132,6 +132,8 @@
         template: template,
         enterTriggersOk: false
       }, options);
+
+      this.$el.on('hide.bs.modal', this.close.bind(this));
     },
 
     /**
@@ -147,7 +149,7 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      var $content = this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content && content.$el) {
@@ -220,7 +222,7 @@
       }
 
       this.on('cancel', function() {
-        self.close();
+        self.$el.modal('hide');
       });
 
       Modal.count++;
@@ -259,8 +261,6 @@
 
         self.trigger('hidden');
       });
-
-      $el.modal('hide');
 
       Modal.count--;
     },
