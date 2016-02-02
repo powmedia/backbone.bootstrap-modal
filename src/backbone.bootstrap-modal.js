@@ -213,10 +213,10 @@
         });
 
         $(document).one('keyup.dismiss.modal', function (e) {
-          e.which == 27 && self.trigger('cancel');
+          e.which == 27 && self.options.escape && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown', self);
+            e.which == 27 && self.options.escape && self.options.content.trigger('shown', self);
           }
         });
       }
