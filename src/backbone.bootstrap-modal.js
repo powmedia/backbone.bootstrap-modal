@@ -133,7 +133,7 @@
         enterTriggersOk: false
       }, options);
 
-      this.$el.on('hide.bs.modal', this.close.bind(this));
+      this.$el.on('hide.bs.modal', this.clear.bind(this));
     },
 
     /**
@@ -238,7 +238,14 @@
     /**
      * Closes the modal
      */
-    close: function() {
+    close: function(){
+      this.$el.modal('hide');
+    },
+
+    /**
+     * Clears DOM
+     */
+    clear: function() {
       var self = this,
           $el = this.$el;
 
