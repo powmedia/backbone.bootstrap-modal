@@ -57,46 +57,46 @@
       'click .close': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel', this);
         }
+
+        this.trigger('cancel');
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel', this);
         }
+
+        this.trigger('cancel');
       },
       'click .ok': function(event) {
         event.preventDefault();
-
-        this.trigger('ok');
 
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('ok', this);
         }
 
+        this.trigger('ok');
+
         if (this.options.okCloses) {
-          this.$el.modal('hide');
+          this._close();
         }
       },
       'keypress': function(event) {
         if (this.options.enterTriggersOk && event.which == 13 && event.target.tagName != 'TEXTAREA') {
           event.preventDefault();
 
-          this.trigger('ok');
-
           if (this.options.content && this.options.content.trigger) {
             this.options.content.trigger('ok', this);
           }
 
+          this.trigger('ok');
+
           if (this.options.okCloses) {
-            this.$el.modal('hide');
+            this._close();
           }
         }
       }
@@ -222,7 +222,7 @@
       }
 
       this.on('cancel', function() {
-        self.$el.modal('hide');
+        self._close();
       });
 
       Modal.count++;
@@ -243,17 +243,25 @@
     },
 
     /**
-     * Clears DOM
+     * Private close method
+     * @private
      */
-    clear: function() {
-      var self = this,
-          $el = this.$el;
-
+    _close: function(){
       //Check if the modal should stay open
       if (this._preventClose) {
         this._preventClose = false;
         return;
       }
+
+      this.$el.modal('hide');
+    },
+
+    /**
+     * Clears DOM
+     */
+    clear: function() {
+      var self = this,
+          $el = this.$el;
 
       $el.one('hidden.bs.modal', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
