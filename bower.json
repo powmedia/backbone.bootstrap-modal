@@ -1,0 +1,11 @@
+{  
+  "name": "backbone.bootstrap-modal",  
+  "version": "0.9.0", 
+  "main": [    
+    "src/backbone.bootstrap-modal.js"    
+  ],  
+  "dependencies": {    
+    "backbone": ">=1.0.0",
+    "bootstrap": ">=3.0"
+  }  
+}

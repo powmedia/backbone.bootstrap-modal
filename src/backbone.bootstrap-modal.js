@@ -57,46 +57,46 @@
       'click .close': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel', this);
         }
+
+        this.trigger('cancel');
       },
       'click .cancel': function(event) {
         event.preventDefault();
 
-        this.trigger('cancel');
-
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('cancel', this);
         }
+
+        this.trigger('cancel');
       },
       'click .ok': function(event) {
         event.preventDefault();
-
-        this.trigger('ok');
 
         if (this.options.content && this.options.content.trigger) {
           this.options.content.trigger('ok', this);
         }
 
+        this.trigger('ok');
+
         if (this.options.okCloses) {
-          this.close();
+          this._close();
         }
       },
       'keypress': function(event) {
-        if (this.options.enterTriggersOk && event.which == 13) {
+        if (this.options.enterTriggersOk && event.which == 13 && event.target.tagName != 'TEXTAREA') {
           event.preventDefault();
-
-          this.trigger('ok');
 
           if (this.options.content && this.options.content.trigger) {
             this.options.content.trigger('ok', this);
           }
 
+          this.trigger('ok');
+
           if (this.options.okCloses) {
-            this.close();
+            this._close();
           }
         }
       }
@@ -132,6 +132,8 @@
         template: template,
         enterTriggersOk: false
       }, options);
+
+      this.$el.on('hide.bs.modal', this.clear.bind(this));
     },
 
     /**
@@ -147,7 +149,7 @@
       //Create the modal container
       $el.html(options.template(options));
 
-      var $content = this.$content = $el.find('.modal-body')
+      var $content = this.$content = $el.find('.modal-body');
 
       //Insert the main content if it's a view
       if (content && content.$el) {
@@ -175,7 +177,7 @@
 
       //Create it
       $el.modal(_.extend({
-        keyboard: this.options.allowCancel,
+        keyboard: this.options.escape,
         backdrop: this.options.allowCancel ? true : 'static'
       }, this.options.modalOptions));
 
@@ -211,16 +213,16 @@
         });
 
         $(document).one('keyup.dismiss.modal', function (e) {
-          e.which == 27 && self.trigger('cancel');
+          e.which == 27 && self.options.escape && self.trigger('cancel');
 
           if (self.options.content && self.options.content.trigger) {
-            e.which == 27 && self.options.content.trigger('shown', self);
+            e.which == 27 && self.options.escape && self.options.content.trigger('shown', self);
           }
         });
       }
 
       this.on('cancel', function() {
-        self.close();
+        self._close();
       });
 
       Modal.count++;
@@ -236,15 +238,30 @@
     /**
      * Closes the modal
      */
-    close: function() {
-      var self = this,
-          $el = this.$el;
+    close: function(){
+      this.$el.modal('hide');
+    },
 
+    /**
+     * Private close method
+     * @private
+     */
+    _close: function(){
       //Check if the modal should stay open
       if (this._preventClose) {
         this._preventClose = false;
         return;
       }
+
+      this.$el.modal('hide');
+    },
+
+    /**
+     * Clears DOM
+     */
+    clear: function() {
+      var self = this,
+          $el = this.$el;
 
       $el.one('hidden.bs.modal', function onHidden(e) {
         // Ignore events propagated from interior objects, like bootstrap tooltips
@@ -259,8 +276,6 @@
 
         self.trigger('hidden');
       });
-
-      $el.modal('hide');
 
       Modal.count--;
     },
