@@ -26,7 +26,12 @@
       setTimeout(function() {
         var modal = new Backbone.BootstrapModal({
           animate: true,
-          content: new ModalContent()
+          content: new ModalContent(),
+		  modalClass: "example-class",
+		  headerClass: "header-class",
+		  bodyClass: "body-class",
+		  footerClass: "footer-class",
+		  title : "Hello World"
         }).open();
       }, 1000);
     </script>
