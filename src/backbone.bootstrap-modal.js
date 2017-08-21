@@ -153,7 +153,7 @@
           options = this.options,
           content = options.content;
 	  
-	  // check and handle css classes
+	  // add spaces before css classes so its added correctly
 	  if (options.modalClass) {
 		  options.modalClass = " " + options.modalClass;
 	  }	  
