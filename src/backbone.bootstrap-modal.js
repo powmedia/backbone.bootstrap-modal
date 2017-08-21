@@ -22,18 +22,18 @@
   };
 
   var template = _.template('\
-    <div class="modal-dialog"><div class="modal-content">\
+    <div class="modal-dialog{{modalClass}}"><div class="modal-content">\
     <% if (title) { %>\
-      <div class="modal-header">\
+      <div class="modal-header{{headerClass}}">\
         <% if (allowCancel) { %>\
           <a class="close">&times;</a>\
         <% } %>\
         <h4>{{title}}</h4>\
       </div>\
     <% } %>\
-    <div class="modal-body">{{content}}</div>\
+    <div class="modal-body{{bodyClass}}">{{content}}</div>\
     <% if (showFooter) { %>\
-      <div class="modal-footer">\
+      <div class="modal-footer{{footerClass}}">\
         <% if (allowCancel) { %>\
           <% if (cancelText) { %>\
             <a href="#" class="btn cancel">{{cancelText}}</a>\
@@ -107,16 +107,21 @@
      *
      * @see http://twitter.github.com/bootstrap/javascript.html#modals
      *
-     * @param {Object} options
-     * @param {String|View} [options.content]     Modal content. Default: none
-     * @param {String} [options.title]            Title. Default: none
-     * @param {String} [options.okText]           Text for the OK button. Default: 'OK'
-     * @param {String} [options.cancelText]       Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
-     * @param {Boolean} [options.allowCancel      Whether the modal can be closed, other than by pressing OK. Default: true
-     * @param {Boolean} [options.escape]          Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
-     * @param {Boolean} [options.animate]         Whether to animate in/out. Default: false
-     * @param {Function} [options.template]       Compiled underscore template to override the default one
-     * @param {Boolean} [options.enterTriggersOk] Whether the 'enter' key will trigger OK. Default: false
+     * @param {Object} 		options
+     * @param {String|		View} [options.content]     	Modal content. Default: none
+     * @param {String} 		[options.title]            		Title. Default: none
+     * @param {String} 		[options.okText]           		Text for the OK button. Default: 'OK'
+     * @param {String} 		[options.cancelText]       		Text for the cancel button. Default: 'Cancel'. If passed a falsey value, the button will be removed
+     * @param {Boolean} 	[options.allowCancel      		Whether the modal can be closed, other than by pressing OK. Default: true
+     * @param {Boolean} 	[options.escape]          		Whether the 'esc' key can dismiss the modal. Default: true, but false if options.cancellable is true
+     * @param {Boolean} 	[options.animate]         		Whether to animate in/out. Default: false
+     * @param {Function} 	[options.template]       		Compiled underscore template to override the default one
+     * @param {Boolean} 	[options.enterTriggersOk] 		Whether the 'enter' key will trigger OK. Default: false
+	 * @param {String} 		[options.modalClass] 			add a css class to the modal dialogue
+	 * @param {String} 		[options.bodyClass] 			add a css class to the modal body 
+	 * @param {String} 		[options.headerClass] 			add a css class to the modal header
+	 * @param {String} 		[options.footerClass] 			add a css class to the modal footer
+
      */
     initialize: function(options) {
       this.options = _.extend({
@@ -130,7 +135,11 @@
         escape: true,
         animate: false,
         template: template,
-        enterTriggersOk: false
+        enterTriggersOk: false,
+		modalClass : null,
+		bodyClass : null,
+		headerClass: null,
+		footerClass: null
       }, options);
     },
 
@@ -143,7 +152,21 @@
       var $el = this.$el,
           options = this.options,
           content = options.content;
-
+	  
+	  // add spaces before css classes so its added correctly
+	  if (options.modalClass) {
+		  options.modalClass = " " + options.modalClass;
+	  }	  
+	  if (options.bodyClass) {
+		  options.bodyClass = " " + options.bodyClass;
+	  }
+	  if (options.headerClass) {
+		  options.headerClass = " " + options.headerClass;
+	  }
+	  if (options.footerClass) {
+		  options.footerClass = " " + options.footerClass;
+	  }
+	  
       //Create the modal container
       $el.html(options.template(options));
 
